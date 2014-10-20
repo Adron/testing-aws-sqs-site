@@ -4,9 +4,10 @@
  *    security information is available for the SDK to use.
  */
 
-var should = require('should');
-var AWS = require('aws-sdk');
-var awsRegion = 'us-west-2';
+var should = require('should'),
+  AWS = require('aws-sdk'),
+  awsRegion = 'us-west-2',
+  sqs = {};
 
 describe('When trying out this sample application in AWS you', function () {
   "use strict";
@@ -16,13 +17,16 @@ describe('When trying out this sample application in AWS you', function () {
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.AWS_SECRET_KEY,
       region: awsRegion});
+    sqs = new AWS.SQS();
   })
 
   it('should have an environment variable set for AWS_ACCESS_KEY_ID', function () {
+    console.log(process.env.AWS_ACCESS_KEY_ID);
     process.env.AWS_ACCESS_KEY_ID.should.exist;
   });
 
   it('should have an environment variables set for AWS_SECRET_KEY', function () {
+    console.log(process.env.AWS_SECRET_KEY);
     process.env.AWS_SECRET_KEY.should.exist;
   })
 
@@ -34,6 +38,27 @@ describe('When trying out this sample application in AWS you', function () {
 
   it('should have the AWS region set to us west 2', function () {
     AWS.config.region.should.equal(awsRegion);
+  })
+
+  it('should send a message to the queue', function (done) {
+
+
+    var params = {
+      QueueNamePrefix: ''
+    };
+    sqs.listQueues(params, function (err, data) {
+
+
+      if (err) console.log(err, err.stack); // an error occurred
+      else {
+        console.log(data);
+        done();
+      }// successful response
+
+
+    });
+
+
   })
 
 });
