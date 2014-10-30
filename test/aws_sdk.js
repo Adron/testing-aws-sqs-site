@@ -64,7 +64,6 @@ describe("When trying out this sample application in AWS you", function () {
     var params = {
       MessageBody: "The Message Body Goes Here",
       QueueUrl: "https://sqs.us-west-2.amazonaws.com/588271471917/a_sample",
-      //QueueUrl: "https://sqs.us-west-2.amazonaws.com/588271471917/sample",
       DelaySeconds: 0
     };
 
@@ -80,5 +79,4 @@ describe("When trying out this sample application in AWS you", function () {
       ;
     });
   })
-  
 });

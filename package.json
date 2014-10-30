@@ -32,7 +32,6 @@
   "dependencies": {
     "aws-sdk": "^2.0.21",
     "good": "^3.0.1",
-    "handlebars": "^2.0.0",
     "hapi": "^7.0.0"
   }
 }
