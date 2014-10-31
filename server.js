@@ -1,6 +1,10 @@
-var AWS = require('aws-sdk')
-var Hapi = require('hapi');
-var Good = require('good');
+var should = require("should"),
+  AWS = require("aws-sdk"),
+  awsRegion = "us-west-2",
+  sqs = {},
+  Hapi = require('hapi'),
+  Good = require('good');
+
 
 var server = new Hapi.Server(3000);
 
@@ -15,9 +19,16 @@ server.route({
 function sendSqsMessage() {
   "use strict";
 
+  AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+    region: awsRegion
+  });
+  sqs = new AWS.SQS();
+
   var params = {
     MessageBody: "The Message Body Goes Here",
-    QueueUrl: "https://sqs.us-west-2.amazonaws.com/588271471917/sample",
+    QueueUrl: "https://sqs.us-west-2.amazonaws.com/588271471917/a_sample",
     DelaySeconds: 0
   };
 
@@ -37,7 +48,7 @@ server.route({
   path: '/{name}',
   handler: function (request, reply) {
     sendSqsMessage(encodeURIComponent(request.params.name));
-    reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
+    reply('Your message ' + encodeURIComponent(request.params.name) + ' has been sent to queue!');
   }
 });
 
