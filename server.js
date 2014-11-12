@@ -33,11 +33,10 @@ function sendSqsMessage() {
 
   sqs.sendMessage(params, function (err, data) {
     if (err) {
-      server.log(err, err.stack);
+      server.log("Error: ", err);
     } // an error occurred
     else {
       server.log('Victory, message sent for ' + encodeURIComponent(request.params.name) + '!');
-      server.log(data);
     };
   });
 }
