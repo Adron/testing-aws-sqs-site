@@ -27,7 +27,7 @@ function sendSqsMessage() {
 
   var params = {
     MessageBody: "The Message Body Goes Here",
-    QueueUrl: "https://sqs.us-west-2.amazonaws.com/588271471917/a_sample",
+    QueueUrl: "https://sqs.us-west-2.amazonaws.com/621392439615/sample",
     DelaySeconds: 0
   };
 
