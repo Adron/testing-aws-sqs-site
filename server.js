@@ -3,7 +3,8 @@ var
   awsRegion = "us-west-2",
   sqs = {},
   Hapi = require('hapi'),
-  Good = require('good');
+  Good = require('good'),
+  queueUri = 'https://sqs.us-west-2.amazonaws.com/621392439615/a_sample';
 
 var server = new Hapi.Server(process.env.PORT || 3000);
 
@@ -27,7 +28,7 @@ function sendSqsMessage(nameParam) {
 
   var params = {
     MessageBody: "Hello " + nameParam,
-    QueueUrl: "https://sqs.us-west-2.amazonaws.com/621392439615/sample",
+    QueueUrl: queueUri,
     DelaySeconds: 0
   };
 
