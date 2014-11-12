@@ -15,7 +15,7 @@ server.route({
   }
 });
 
-function sendSqsMessage() {
+function sendSqsMessage(nameParam) {
   "use strict";
 
   AWS.config.update({
@@ -26,7 +26,7 @@ function sendSqsMessage() {
   sqs = new AWS.SQS();
 
   var params = {
-    MessageBody: "The Message Body Goes Here",
+    MessageBody: "Hello " + nameParam,
     QueueUrl: "https://sqs.us-west-2.amazonaws.com/621392439615/sample",
     DelaySeconds: 0
   };
