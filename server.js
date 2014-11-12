@@ -1,10 +1,9 @@
-var should = require("should"),
+var
   AWS = require("aws-sdk"),
   awsRegion = "us-west-2",
   sqs = {},
   Hapi = require('hapi'),
   Good = require('good');
-
 
 var server = new Hapi.Server(process.env.PORT || 3000);
 
@@ -34,12 +33,12 @@ function sendSqsMessage() {
 
   sqs.sendMessage(params, function (err, data) {
     if (err) {
-      console.log(err, err.stack);
+      server.log(err, err.stack);
     } // an error occurred
     else {
-      console.log('Victory, message sent for ' + encodeURIComponent(request.params.name) + '!');
-    }
-    ;
+      server.log('Victory, message sent for ' + encodeURIComponent(request.params.name) + '!');
+      server.log(data);
+    };
   });
 }
 
